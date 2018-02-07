@@ -20,7 +20,7 @@ class TidyDF:
     def untidy(self):
         return self._df
 
-    def _parsecolstr(self, colstr):
+    def _parse_idx_str(self, colstr):
         deselect = colstr.startswith('-')
         is_slice = ':' in colstr
         if deselect:
