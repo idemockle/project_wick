@@ -1,7 +1,6 @@
 import pandas as pd
-import numpy as np
 
-import tidyr
+from wick import tidyr
 
 
 class TidyDF:
