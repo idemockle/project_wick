@@ -16,7 +16,7 @@ def spread(tidydf, key, value, fill=None, sep=None):
 def gather(tidydf, key, value, *args, na_rm=False):
     idxset = set()
     for idxstr in args:
-        idxlist = tidydf._parse_idx_str(idxstr)
+        idxlist = tidydf._parse_select(idxstr)
         idxset |= set(idxlist)
     idxcols = tidydf._invert_idx(list(idxset))
     idxcols = list(tidydf._df.columns.values[idxcols])
@@ -28,3 +28,4 @@ def gather(tidydf, key, value, *args, na_rm=False):
         tidydf._df.dropna(inplace=True)
     tidydf._df = tidydf._df.reset_index()
     return tidydf
+

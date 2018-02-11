@@ -1,6 +1,7 @@
 import pandas as pd
 
 from wick import tidyr
+from wick import wparse
 
 
 class TidyDF:
@@ -19,31 +20,11 @@ class TidyDF:
     def untidy(self):
         return self._df
 
-    def _parse_idx_str(self, colstr):
-        deselect = colstr.startswith('-')
-        if deselect:
-            colstr = colstr[1:]
-
-        is_slice = ':' in colstr
-        if is_slice:
-            start_col, end_col = colstr.split(':')
-            start_idx = self._df.columns.get_loc(start_col)
-            end_idx = self._df.columns.get_loc(end_col) + 1
-            out_idx = list(range(start_idx, end_idx))
-        else:
-            out_idx = [self._df.columns.get_loc(colstr)]
-
-        if deselect:
-            return self._invert_idx(out_idx)
-        else:
-            return out_idx
+    def _parse_select(self, colstr):
+        return wparse.colselect(self._df, colstr)
 
     def _invert_idx(self, idx):
-        if type(idx) == int:
-            idx = {idx}
-        else:
-            idx = set(idx)
-        return list(set(range(self._df.shape[1])) - idx)
+        return wparse.invert_idx(self._df, idx)
 
     def __str__(self):
         n_head_rows = 5
