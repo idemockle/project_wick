@@ -1,6 +1,3 @@
-import pandas as pd
-
-
 def spread(tidydf, key, value, fill=None, sep=None):
     index_cols = [col for col in tidydf._df.columns if col not in [key, value]]
     index_cols = index_cols + [key]
