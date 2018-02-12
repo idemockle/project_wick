@@ -1,6 +1,6 @@
 import pandas as pd
 
-from wick import tidyr
+from wick import reshape
 from wick import wparse
 
 
@@ -12,10 +12,10 @@ class TidyDF:
             self._df = df.copy()
 
     def spread(self, key, value, fill=None, sep=None):
-        return tidyr.spread(self, key, value, fill, sep)
+        return reshape.spread(self, key, value, fill, sep)
 
     def gather(self, key, value, *args, na_rm=False):
-        return tidyr.gather(self, key, value, *args, na_rm=na_rm)
+        return reshape.gather(self, key, value, *args, na_rm=na_rm)
 
     def untidy(self):
         return self._df
