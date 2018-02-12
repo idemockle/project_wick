@@ -2,6 +2,7 @@ import pandas as pd
 
 from wick import reshape
 from wick import wparse
+from wick import subset
 
 
 class TidyDF:
@@ -16,6 +17,10 @@ class TidyDF:
 
     def gather(self, key, value, *args, na_rm=False):
         return reshape.gather(self, key, value, *args, na_rm=na_rm)
+
+    def distinct(self, *args, keep_all=False):
+        self._df = subset.distinct(self._df, *args, keep_all)
+        return self
 
     def untidy(self):
         return self._df
